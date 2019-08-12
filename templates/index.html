@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <h1>Welcome to the Great Number Game!</h1>
+    <p>I am thinking of a number between 1 and 100.</p>
+    <p>Take a guess!</p>
+    <form action="/guess" method="post">
+        <input type="number" name="guess">
+        <input id="button" type="submit" value="submit">
+    </form>
+    <form action="/reset">
+        <input type="submit" value="reset" name="">
+    </form>
+    <main>
+        {% if 'user_guess' in session %}
+            {% if user_guess == rand_int %}
+                <p class="green">{{ session['message'] }}
+                    <br>
+                    <h2>{{rand_int}}</h2>
+                </p>
+            {% elif user_guess > rand_int or user_guess < rand_int %}
+                <p class="red">{{ session['message'] }}</p>
+            {% endif %}
+        {% endif %}
+    </main>
+</body>
+</html>
